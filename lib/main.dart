@@ -1,121 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_2/configs/routes.dart';
+import 'package:flutter_application_2/views/login.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp(
-    MaterialApp(
+    GetMaterialApp(
+      initialRoute: "/login",
+      getPages: routes,
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blueAccent,
-          title: Text(
-            "Login Screen",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            //crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset('assets/profilepic.png', height: 100, width: 100),
-              //Text(
-              // "Login Screen",
-              // style: TextStyle(
-              //   color: Colors.black,
-              //  fontSize: 30,
-              // fontWeight: FontWeight.bold,
-              // ),
-              // ),
-              SizedBox(height: 30),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Enter username",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: "Pin or password",
-                  prefixIcon: Icon(Icons.person),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Enter password",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  hintText: "Enter password",
-                  prefixIcon: Icon(Icons.lock),
-                  suffixIcon: Icon(Icons.visibility),
-                ),
-              ),
-              SizedBox(height: 30),
-              MaterialButton(
-                onPressed: () {},
-                //child: Text(
-                //  "Login",
-                //  style: TextStyle(color: Colors.white, fontSize: 20),
-              ),
-              //  color: Colors.blueAccent,
-              // ),
-              Container(
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(color: Colors.blueAccent),
-                child: Text(
-                  "Login",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                child: Row(
-                  children: [
-                    Text("Don't have an account?"),
-                    SizedBox(width: 5),
-                    Text("Signup", style: TextStyle(color: Colors.blueAccent)),
-                    Spacer(),
-                    Text("Forgot password?"),
-                    Text("reset", style: TextStyle(color: Colors.blueAccent)),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      home: LoginScreen(),
     ),
   );
+}
+
+class MyApp {
+  const MyApp();
 }
