@@ -9,7 +9,7 @@ void main() {
       initialRoute: "/login",
       getPages: routes,
       debugShowCheckedModeBanner: false,
-      home: LoginScreen(),
+      // home: LoginScreen(),
     ),
   );
 }

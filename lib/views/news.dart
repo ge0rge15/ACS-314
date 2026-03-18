@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class NewsScreen extends StatefulWidget {
+  const NewsScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<NewsScreen> createState() => _NewsScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Text("profile"),
+        title: Text("News"),
         centerTitle: true,
         foregroundColor: Colors.white,
         actions: [
@@ -22,14 +22,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () {},
             icon: IconButton(
               onPressed: () {
-                Get.offAndToNamed("/profile");
+                Get.offAndToNamed("/news");
               },
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.newspaper),
             ),
           ),
         ],
       ),
-      body: Center(child: Text("Profile")),
+      body: Center(child: Text("Offical News")),
     );
   }
 }

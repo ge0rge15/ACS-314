@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class LibraryScreen extends StatefulWidget {
+  const LibraryScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<LibraryScreen> createState() => _LibraryScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _LibraryScreenState extends State<LibraryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Text("profile"),
+        title: Text("Library"),
         centerTitle: true,
         foregroundColor: Colors.white,
         actions: [
@@ -22,14 +23,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () {},
             icon: IconButton(
               onPressed: () {
-                Get.offAndToNamed("/profile");
+                Get.offAndToNamed("/library");
               },
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.library_add_check),
             ),
           ),
         ],
       ),
-      body: Center(child: Text("Profile")),
+      body: Center(child: Text("Games")),
     );
   }
 }

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class PlayScreen extends StatefulWidget {
+  const PlayScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<PlayScreen> createState() => _PlayScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _PlayScreenState extends State<PlayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Text("profile"),
+        title: Text("Play"),
         centerTitle: true,
         foregroundColor: Colors.white,
         actions: [
@@ -22,14 +22,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             onPressed: () {},
             icon: IconButton(
               onPressed: () {
-                Get.offAndToNamed("/profile");
+                Get.offAndToNamed("/play");
               },
-              icon: Icon(Icons.person),
+              icon: Icon(Icons.gamepad),
             ),
           ),
         ],
       ),
-      body: Center(child: Text("Profile")),
+      body: Center(child: Text("Recently played")),
     );
   }
 }
