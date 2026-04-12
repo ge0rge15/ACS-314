@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -9,6 +11,56 @@ class SignupScreen extends StatefulWidget {
 }
 
 class _SignupScreenState extends State<SignupScreen> {
+  TextEditingController fullnameController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmController = TextEditingController();
+
+  Future<void> signupUser() async {
+    if (fullnameController.text.isEmpty ||
+        usernameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty) {
+      Get.snackbar("Error", "All fields are required");
+      return;
+    }
+
+    if (passwordController.text != confirmController.text) {
+      Get.snackbar("Error", "Passwords do not match");
+      return;
+    }
+
+    try {
+      var url = Uri.parse("http://localhost/acs314/signup.php");
+
+      var response = await http.post(
+        url,
+        body: {
+          "fullname": fullnameController.text,
+          "username": usernameController.text,
+          "email": emailController.text,
+          "password": passwordController.text,
+        },
+      );
+
+      print("SERVER RESPONSE: ${response.body}");
+
+      var data = jsonDecode(response.body);
+
+      if (data["code"] == 1) {
+        Get.snackbar("Success", "Account created");
+        Get.offAllNamed("/homescreen");
+      } else {
+        print("ERROR FROM SERVER: ${data["error"]}");
+        Get.snackbar("Error", "Signup failed: ${data["error"]}");
+      }
+    } catch (e) {
+      print("EXCEPTION: $e");
+      Get.snackbar("Error", "Cannot connect to server");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +81,6 @@ class _SignupScreenState extends State<SignupScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              /// Profile image
               Image.asset('assets/profilepic.png', height: 100, width: 100),
 
               const SizedBox(height: 10),
@@ -41,16 +92,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 20),
 
-              /// Full name
-              Row(
-                children: const [
-                  Text(
-                    "Full Name",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
               TextField(
+                controller: fullnameController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.person),
                   hintText: "Enter full name",
@@ -62,16 +105,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 15),
 
-              /// Username
-              Row(
-                children: const [
-                  Text(
-                    "Username",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
               TextField(
+                controller: usernameController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.account_circle),
                   hintText: "Enter username",
@@ -83,13 +118,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 15),
 
-              /// Email
-              Row(
-                children: const [
-                  Text("Email", style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
               TextField(
+                controller: emailController,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.email),
                   hintText: "Enter email",
@@ -101,20 +131,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 15),
 
-              /// Password
-              Row(
-                children: const [
-                  Text(
-                    "Password",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
               TextField(
+                controller: passwordController,
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: const Icon(Icons.visibility),
                   hintText: "Enter password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -124,20 +145,11 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 15),
 
-              /// Confirm password
-              Row(
-                children: const [
-                  Text(
-                    "Confirm Password",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
               TextField(
+                controller: confirmController,
                 obscureText: true,
                 decoration: InputDecoration(
                   prefixIcon: const Icon(Icons.lock),
-                  suffixIcon: const Icon(Icons.visibility),
                   hintText: "Confirm password",
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -147,8 +159,8 @@ class _SignupScreenState extends State<SignupScreen> {
 
               const SizedBox(height: 25),
 
-              /// Sign up button
               GestureDetector(
+                onTap: signupUser,
                 child: Container(
                   width: double.infinity,
                   height: 50,
@@ -161,32 +173,23 @@ class _SignupScreenState extends State<SignupScreen> {
                     "Sign Up",
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
-
-                onTap: () {
-                  Get.offAndToNamed("/homescreen");
-                },
               ),
 
               const SizedBox(height: 20),
 
-              /// Navigation row
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text("Already have an account? "),
-                  Text(
-                    "Login",
-                    style: TextStyle(
-                      color: Colors.blueAccent,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              GestureDetector(
+                onTap: () {
+                  Get.back();
+                },
+                child: const Text(
+                  "Already have an account? Login",
+                  style: TextStyle(color: Colors.blueAccent),
+                ),
               ),
             ],
           ),
