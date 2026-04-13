@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
@@ -56,16 +57,17 @@ class _HomeScreenState extends State<Homescreen> {
       ],
     ),
 
+    // STORE PAGE
     GridView.count(
       padding: EdgeInsets.all(16),
       crossAxisCount: 2,
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      children: const [
-        Card(child: Center(child: Text("Game 1"))),
-        Card(child: Center(child: Text("Game 2"))),
-        Card(child: Center(child: Text("Game 3"))),
-        Card(child: Center(child: Text("Game 4"))),
+      children: [
+        gameCard("assets/game 1.png", "RED DEAD REDEMPTION II"),
+        gameCard("assets/game 2.png", "GTA VI"),
+        gameCard("assets/game 3.png", "THE LAST OF US PART II"),
+        gameCard("assets/game 4.png", "MORTAL 1 KOMBAT"),
       ],
     ),
 
@@ -99,6 +101,24 @@ class _HomeScreenState extends State<Homescreen> {
     ),
   ];
 
+  void logout() {
+    Get.dialog(
+      AlertDialog(
+        title: const Text("Logout"),
+        content: const Text("Are you sure you want to logout?"),
+        actions: [
+          TextButton(onPressed: () => Get.back(), child: const Text("Cancel")),
+          TextButton(
+            onPressed: () {
+              Get.offAllNamed("/login");
+            },
+            child: const Text("Logout", style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,6 +126,12 @@ class _HomeScreenState extends State<Homescreen> {
         title: Text(titles[_page]),
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout, color: Colors.white),
+            onPressed: logout,
+          ),
+        ],
       ),
 
       body: pages[_page],
@@ -115,7 +141,6 @@ class _HomeScreenState extends State<Homescreen> {
         backgroundColor: Colors.white,
         color: Colors.blueAccent,
         buttonBackgroundColor: Colors.blueAccent,
-
         items: const [
           Icon(Icons.sports_esports, size: 30),
           Icon(Icons.newspaper_outlined, size: 30),
@@ -123,7 +148,6 @@ class _HomeScreenState extends State<Homescreen> {
           Icon(Icons.library_add_check, size: 30),
           Icon(Icons.person, size: 30),
         ],
-
         onTap: (index) {
           setState(() {
             _page = index;
@@ -132,4 +156,47 @@ class _HomeScreenState extends State<Homescreen> {
       ),
     );
   }
+}
+
+Widget gameCard(String imagePath, String title) {
+  return Card(
+    clipBehavior: Clip.antiAlias,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+    child: Stack(
+      fit: StackFit.expand,
+      children: [
+        // Image fills the card
+        Image.asset(
+          imagePath,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) {
+            return Container(
+              color: Colors.grey[300],
+              child: const Icon(Icons.image, size: 50, color: Colors.grey),
+            );
+          },
+        ),
+
+        // Title at the bottom
+        Positioned(
+          bottom: 0,
+          left: 0,
+          right: 0,
+          child: Container(
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+            color: Colors.black.withOpacity(0.6),
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
 }
