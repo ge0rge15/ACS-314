@@ -131,7 +131,10 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   height: 50,
                   alignment: Alignment.center,
-                  decoration: const BoxDecoration(color: Colors.blueAccent),
+                  decoration: BoxDecoration(
+                    color: Colors.blueAccent,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: const Text(
                     "Login",
                     style: TextStyle(color: Colors.white, fontSize: 16),

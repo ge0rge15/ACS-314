@@ -33,6 +33,36 @@ class _HomeScreenState extends State<Homescreen> {
           title: Text("FIFA 24"),
           subtitle: Text("Last played: Yesterday"),
         ),
+        ListTile(
+          leading: Icon(Icons.sports_esports),
+          title: Text("Apex Legends"),
+          subtitle: Text("Last played: 2 days ago"),
+        ),
+        ListTile(
+          leading: Icon(Icons.sports_esports),
+          title: Text("Fortnite"),
+          subtitle: Text("Last played: 3 days ago"),
+        ),
+        ListTile(
+          leading: Icon(Icons.sports_esports),
+          title: Text("FC 26"),
+          subtitle: Text("Last played: Yesterday"),
+        ),
+        ListTile(
+          leading: Icon(Icons.sports_esports),
+          title: Text("RED DEAD REDEMPTION II"),
+          subtitle: Text("Last played: A week ago"),
+        ),
+        ListTile(
+          leading: Icon(Icons.sports_esports),
+          title: Text("Horizon Zero Dawn"),
+          subtitle: Text("Last played: A month ago"),
+        ),
+        ListTile(
+          leading: Icon(Icons.sports_esports),
+          title: Text("THE LAST OF US PART II"),
+          subtitle: Text("Last played: A month ago"),
+        ),
       ],
     ),
 
@@ -57,7 +87,6 @@ class _HomeScreenState extends State<Homescreen> {
       ],
     ),
 
-    // STORE PAGE
     GridView.count(
       padding: EdgeInsets.all(16),
       crossAxisCount: 2,
@@ -68,6 +97,10 @@ class _HomeScreenState extends State<Homescreen> {
         gameCard("assets/game 2.png", "GTA VI"),
         gameCard("assets/game 3.png", "THE LAST OF US PART II"),
         gameCard("assets/game 4.png", "MORTAL 1 KOMBAT"),
+        gameCard("assets/game 5.png", "FC 26"),
+        gameCard("assets/game 6.png", "APEX LEGENDS"),
+        gameCard("assets/game 7.png", "HORIZON ZERO DAWN"),
+        gameCard("assets/game 8.png", "GOD OF WAR RAGNAROK"),
       ],
     ),
 
@@ -87,16 +120,48 @@ class _HomeScreenState extends State<Homescreen> {
       ],
     ),
 
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+    // PROFILE PAGE
+    ListView(
+      padding: const EdgeInsets.all(16),
       children: const [
         CircleAvatar(radius: 40, child: Icon(Icons.person, size: 40)),
+
         SizedBox(height: 10),
-        Text(
-          "Username",
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+
+        Center(
+          child: Text(
+            "Username",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
         ),
-        Text("user@email.com"),
+
+        SizedBox(height: 20),
+
+        Divider(),
+
+        ListTile(
+          leading: Icon(Icons.accessibility),
+          title: Text("Accessibility"),
+          trailing: Icon(Icons.arrow_forward_ios, size: 16),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.people),
+          title: Text("Users and Accounts"),
+          trailing: Icon(Icons.arrow_forward_ios, size: 16),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.family_restroom),
+          title: Text("Family and Parental Controls"),
+          trailing: Icon(Icons.arrow_forward_ios, size: 16),
+        ),
+
+        ListTile(
+          leading: Icon(Icons.storage),
+          title: Text("System and Storage"),
+          trailing: Icon(Icons.arrow_forward_ios, size: 16),
+        ),
       ],
     ),
   ];
@@ -165,7 +230,6 @@ Widget gameCard(String imagePath, String title) {
     child: Stack(
       fit: StackFit.expand,
       children: [
-        // Image fills the card
         Image.asset(
           imagePath,
           fit: BoxFit.cover,
@@ -176,8 +240,6 @@ Widget gameCard(String imagePath, String title) {
             );
           },
         ),
-
-        // Title at the bottom
         Positioned(
           bottom: 0,
           left: 0,
