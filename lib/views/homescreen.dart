@@ -111,12 +111,28 @@ class _HomeScreenState extends State<Homescreen> {
           "Games",
           style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 20),
         ListTile(
           leading: Icon(Icons.videogame_asset),
-          title: Text("Minecraft"),
+          title: Text("MINECRAFT"),
         ),
         ListTile(leading: Icon(Icons.videogame_asset), title: Text("GTA V")),
+        ListTile(leading: Icon(Icons.videogame_asset), title: Text("FORTNITE")),
+        ListTile(
+          leading: Icon(Icons.videogame_asset),
+          title: Text("CALL OF DUTY"),
+        ),
+        ListTile(
+          leading: Icon(Icons.videogame_asset),
+          title: Text("APEX LEGENDS"),
+        ),
+        ListTile(leading: Icon(Icons.videogame_asset), title: Text("MK 11")),
+        ListTile(
+          leading: Icon(Icons.videogame_asset),
+          title: Text("INJUSTICE 2"),
+        ),
+        ListTile(leading: Icon(Icons.videogame_asset), title: Text("MK1")),
+        ListTile(leading: Icon(Icons.videogame_asset), title: Text("FC 26")),
       ],
     ),
 
